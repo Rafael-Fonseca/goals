@@ -39,7 +39,7 @@ def ask_positive_int(msg, error_msg="Valor inválido!"):
         return ask_positive_int(msg)
 
 
-def showMenu(listOptions, exitMsg = "0. Sair"):
+def show_menu(listOptions, exitMsg = "0. Sair"):
     print("------------------------------------------------\n"
           "|                      MENU                    |\n"
           "------------------------------------------------")
