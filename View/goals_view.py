@@ -45,7 +45,7 @@ def show_menu(listOptions, exitMsg = "0. Sair"):
           "------------------------------------------------")
 
     for msg in range(0, len(listOptions)):
-        print("---", str(msg)+".", listOptions[msg])
+        print("---", str(msg+1)+".", listOptions[msg])
 
     print("---", exitMsg)
 
@@ -53,7 +53,7 @@ def show_menu(listOptions, exitMsg = "0. Sair"):
 
     if selection > len(listOptions):
         input("Opção inválida!, pressione qualquer tecla para continuar: ")
-        return showMenu(listOptions)
+        return show_menu(listOptions)
 
     return str(selection)
 
@@ -61,13 +61,13 @@ def show_menu(listOptions, exitMsg = "0. Sair"):
 # Esta função printa as opções do usuário ANTES DE EFETUAR LOGIN
 def show_login_options():
     list_options = ["Cadastrar", "Logar", "Esqueci minha senha"]
-    option = showMenu(list_options)
+    option = show_menu(list_options)
     return option
 
 
 # Esta função printa as opções do usuário APÓS EFETUAR LOGIN
 def show_menu_options():
-    list_options = ["Incluir Meta", "Editar Metas", "Excluir Meta", "Acompanhamento Diário",
+    list_options = ["Incluir Meta", "Editar Metas", "Acompanhamento Diário",
                     "Rotina", "Revisão de Resultados", "Perfil"]
-    option = showMenu(list_options)
+    option = show_menu(list_options)
     return option
