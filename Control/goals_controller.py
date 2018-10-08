@@ -9,30 +9,68 @@ def close():
     exit()
 
 
+def success(msg="Solicitação realizada com sucesso!"):
+    input(msg)
+    return main_menu()
+
+
+def fail(msg="Erro, a operação não pode ser realizada!"):
+    input(msg)
+    return main_menu()
+
+
+got_it = {True: success, False: fail}
+
+
 def sign_up():
     username = ask_string("Nome de usuário: ")
     password = ask_numeric_string("Digite sua senha: ")
-# ToDo: Validação de senha válida
+# ToDo: Validação de senha válida // ask_password(msg="Digite sua senha: ")
     email = ask_string("Insira seu email: ")
-# ToDo: Validação de email válido
+# ToDo: Validação de email válido // ask_email(msg="Insira seu email: ")
+    got_it[register(username, password, email)]()
 
-    return register(username, password, email)  # Talvez esteja errado pois a função de controle acaba retornando True or False
-# e isso é o modus operandi da função de Model, a função de controle pega dados da visão e passa para a model ou o contrário
-# ToDo: Se o escrito acima for verdade, talvez seja necessário um IF onde se o register = True printa sucesso, else printa erro
-# ToDo: register() Função Model que retorna True se conseguir cadastrar or False otherwise
+
+"""
+TODO: PARA GARANTIR A RECURSIVIDADE AS FUNÇÕES DAS KEYS 1 ATÉ 6 DEVEM RETORNAR
+PARA LOGGED_MENU()
+"""
+def logged_menu():
+    menu_options = {"0": main_menu, "1": add_goal, "2": edit_goals,
+                    "3": daily_monitoring, "4": routine,
+                    "5": review_results, "6": profile}
+
+    chosen_option = show_menu_options()
+
+    try:
+        menu_options[chosen_option]()
+
+    except KeyError:
+        fail()
+        return logged_menu()
 
 
 def login():
+    login_result = {True: logged_menu, False: fail}
     username = ask_string("Nome de usuário: ")
     password = ask_numeric_string("Digite sua senha: ")
 
-    return validate_login(username, password)
-# ToDo: Função Model que retorna True se login Válido or False otherwise
+    return login_result[validate_login(username, password)]()
 
-
+# TODO: DAQUI PARA BAIXO
 def forgot_password():
     # ToDo: Pede a credencial do usuário envia e-mail com a senha atual.
     pass
+
+
+def main_menu():
+    first_option = {"0": close, "1": sign_up, "2": login, "3": forgot_password}
+    try:
+        login_option = show_login_options()
+        first_option[login_option]()
+
+    except KeyError:
+        return main_menu()
 
 
 def add_goal():

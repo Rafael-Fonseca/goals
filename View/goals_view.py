@@ -28,7 +28,7 @@ def ask_positive_int(msg, error_msg="Valor inválido!"):
 
     try:
         number = int(input(msg))
-        if number < 1:
+        if number < 0:
             print(error_msg)
             return ask_positive_int(msg)
 
@@ -69,5 +69,5 @@ def show_login_options():
 def show_menu_options():
     list_options = ["Incluir Meta", "Editar Metas", "Acompanhamento Diário",
                     "Rotina", "Revisão de Resultados", "Perfil"]
-    option = show_menu(list_options)
+    option = show_menu(list_options, "0. Retornar ao menu inicial")
     return option
